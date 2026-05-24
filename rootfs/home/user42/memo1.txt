@@ -1,0 +1,173 @@
+My shell command memo - part 1 
+
+uname:
+    Usage: uname [-amnrspvio]
+
+    Print system information
+
+        -a	Print all
+        -m	Machine (hardware) type
+        -n	Hostname
+        -r	Kernel release
+        -s	Kernel name (default)
+        -p	Processor type
+        -v	Kernel version
+        -i	Hardware platform
+        -o	OS name
+cal:
+    Usage: cal [-jmy] [[MONTH] YEAR]
+
+    Display a calendar
+
+        -j	Use julian dates
+        -m	Week starts on Monday
+        -y	Display the entire year
+
+man:
+    Usage: man [-aw] [SECTION] MANPAGE[.SECTION]...
+
+    Display manual page
+
+        -a	Display all pages
+        -w	Show page locations
+
+    $COLUMNS overrides output width
+
+whoami:
+    Usage: whoami
+
+    Print the user name associated with the current effective user id
+
+pwd:
+    Usage: pwd [-LP]
+
+    print name of current/working directory
+
+        -L	Use logical path (default)
+        -P	Use physical path
+
+cd:
+    Usage: cd [DIRECTORY]
+
+    Change the current directory to DIRECTORY
+
+        If no DIRECTORY is specified, change to the user's home directory
+        If DIRECTORY is `-`, change to the previous directory
+
+ls:
+    Usage: ls [-1AaCxdLHRFplinshrSXvctu] [-w WIDTH] [FILE]...
+
+    List directory contents
+
+        -1	One column output
+        -a	Include names starting with .
+        -A	Like -a, but exclude . and ..
+        -x	List by lines
+        -d	List directory names, not contents
+        -L	Follow symlinks
+        -H	Follow symlinks on command line
+        -R	Recurse
+        -p	Append / to directory names
+        -F	Append indicator (one of */=@|) to names
+        -l	Long format
+        -i	List inode numbers
+        -n	List numeric UIDs and GIDs instead of names
+        -s	List allocated blocks
+        -lc	List ctime
+        -lu	List atime
+        --full-time	List full date/time
+        -h	Human readable sizes (1K 243M 2G)
+        --group-directories-first
+        -S	Sort by size
+        -X	Sort by extension
+        -v	Sort by version
+        -t	Sort by mtime
+        -tc	Sort by ctime
+        -tu	Sort by atime
+        -r	Reverse sort order
+        -w N	Format N columns wide
+        --color[={always,never,auto}]
+
+mkdir:
+    Usage: mkdir [-m MODE] [-p] DIRECTORY...
+
+    Create DIRECTORY
+
+        -m MODE	Mode
+        -p	No error if exists; make parent directories as needed
+
+rmdir:
+    Usage: rmdir [-p] DIRECTORY...
+
+    Remove DIRECTORY if it is empty
+
+        -p	Include parents
+        --ignore-fail-on-non-empty
+
+rm:
+    Usage: rm [-irf] FILE...
+
+    Remove (unlink) FILEs
+
+        -i	Always prompt before removing
+        -f	Never prompt
+        -R,-r	Recurse
+
+cp:
+    Usage: cp [-arPLHpfinlsTu] SOURCE DEST
+    or: cp [-arPLHpfinlsu] SOURCE... { -t DIRECTORY | DIRECTORY }
+
+    Copy SOURCEs to DEST
+
+        -a	Same as -dpR
+        -R,-r	Recurse
+        -d,-P	Preserve symlinks (default if -R)
+        -L	Follow all symlinks
+        -H	Follow symlinks on command line
+        -p	Preserve file attributes if possible
+        -f	Overwrite
+        -i	Prompt before overwrite
+        -n	Don't overwrite
+        -l,-s	Create (sym)links
+        -T	Refuse to copy if DEST is a directory
+        -t DIR	Copy all SOURCEs into DIR
+        -u	Copy only newer files
+
+mv:
+    Usage: mv [-finT] SOURCE DEST
+    or: mv [-fin] SOURCE... { -t DIRECTORY | DIRECTORY }
+
+    Rename SOURCE to DEST, or move SOURCEs to DIRECTORY
+
+        -f	Don't prompt before overwriting
+        -i	Interactive, prompt before overwrite
+        -n	Don't overwrite an existing file
+        -T	Refuse to move if DEST is a directory
+        -t DIR	Move all SOURCEs into DIR
+
+cat:
+    Usage: cat [-nbvteA] [FILE]...
+
+    Print FILEs to stdout
+
+        -n	Number output lines
+        -b	Number nonempty lines
+        -v	Show nonprinting characters as ^x or M-x
+        -t	...and tabs as ^I
+        -e	...and end lines with $
+        -A	Same as -vte
+
+less:
+    Usage: less [-EFIMmNSRh~] [FILE]...
+
+    View FILE (or stdin) one screenful at a time
+
+        -E	Quit once the end of a file is reached
+        -F	Quit if entire file fits on first screen
+        -I	Ignore case in all searches
+        -M,-m	Display status line with line numbers
+            and percentage through the file
+        -N	Prefix line number to each line
+        -S	Truncate long lines
+        -R	Remove color escape codes in input
+        -~	Suppress ~s displayed past EOF

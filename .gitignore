@@ -1,0 +1,7 @@
+*.img
+*.raw
+*.v86state
+*.v86b
+alpine-bios-*
+vm-bridge-send/staging/
+mount-host-share/staging/
