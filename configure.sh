@@ -36,6 +36,7 @@ addgroup user42 video
 addgroup user42 input
 addgroup user42 tty
 chown -R user42:user42 /home/user42/
+chown -R root:root /root/
 
 step 'Micro editor bindings (browser-safe shortcuts)'
 if [ -x /usr/bin/micro ]; then
