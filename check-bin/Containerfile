@@ -1,0 +1,15 @@
+FROM i386/alpine:3.23
+
+RUN apk add --no-cache build-base
+
+WORKDIR /src
+COPY common.c common.h md5.c md5.h \
+	check_shell101_cp.c check_shell101_mv.c check_shell101_micro.c \
+	check_shell101_rm.c check_shell101_livrable1.c .
+
+RUN mkdir -p /out && \
+	for t in check_shell101_cp check_shell101_mv check_shell101_micro \
+	         check_shell101_rm check_shell101_livrable1; do \
+		gcc -O2 -Wall -Wextra -s -static -o "/out/$t" \
+			common.c md5.c "$t.c"; \
+	done

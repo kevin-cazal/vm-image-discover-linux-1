@@ -32,4 +32,10 @@ IMAGE_SIZE=256M IMAGE=./alpine-bios-256M.img doas ./build.sh
 
 ## Packages
 
-See [`packages`](packages). Course tools include `micro`, `docs`, `coreutils-doc` for `man` pages.
+See [`packages`](packages). Course tools include `micro`, `mandoc`, `coreutils-doc`, and French translations (`manpages-fr` via [`install-manpages-fr.sh`](install-manpages-fr.sh) at build time). The guest defaults to `LANG=fr_FR.UTF-8` so `man` shows French pages when available (English fallback otherwise).
+
+Image build needs network access when `configure.sh` runs (Debian `manpages-fr` package download).
+
+## Shell 101 check binaries
+
+Built with Docker (or `gcc -m32` fallback) via [`check-bin/build.sh`](check-bin/build.sh); installed to `/usr/local/bin/check_shell101_*`. `build.sh` runs this before packing the image. No C sources are shipped on the guest.

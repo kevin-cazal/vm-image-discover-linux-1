@@ -35,6 +35,7 @@ adduser -D -s /bin/bash -h /home/user42 user42
 addgroup user42 video
 addgroup user42 input
 addgroup user42 tty
+mkdir -p /home/user42/memos
 chown -R user42:user42 /home/user42/
 chown -R root:root /root/
 
@@ -84,6 +85,21 @@ chmod 4755 /usr/local/sbin/mount-host-share
 
 if [ -f /etc/fstab ]; then
 	sed -i 's/\trelatime\t/\tnoatime\t/' /etc/fstab
+fi
+
+step 'French manual pages'
+SCRIPT_DIR=$(CDPATH= cd -- "$(dirname "$0")" && pwd)
+if [ ! -f "$SCRIPT_DIR/install-manpages-fr.sh" ]; then
+	echo "install-manpages-fr.sh missing next to configure.sh" >&2
+	exit 1
+fi
+if ! sh "$SCRIPT_DIR/install-manpages-fr.sh"; then
+	echo "WARNING: French manpages install failed (continuing): network may be unavailable during build." >&2
+fi
+
+step 'Man page index'
+if command -v makewhatis >/dev/null 2>&1; then
+	makewhatis
 fi
 
 rm -rf /var/cache/apk/*

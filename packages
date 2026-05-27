@@ -4,6 +4,16 @@ busybox-extras
 less
 micro
 docs
+mandoc
+mandoc-apropos
+man-pages
+musl-locales
 coreutils-doc
 agetty
 linux-firmware-none
+coreutils
+coreutils-env
+coreutils-fmt
+coreutils-sha512sum
+tree
+xxd
