@@ -1,0 +1,32 @@
+#!/bin/sh
+# Validate post-mv layout under ~/101.
+set -eu
+. "$(dirname "$0")/_common.sh"
+
+ROOT="${HOME:-/home/user42}/101"
+FAIL=0
+
+check() {
+	if ! "$@"; then
+		FAIL=1
+	fi
+}
+
+check require_dir "$ROOT"
+check require_file "$ROOT/links/ubuntu"
+check require_file "$ROOT/links/wikipedia_linux"
+check require_absent "$ROOT/links/qrcode1"
+check require_absent "$ROOT/links/qrcode2"
+check require_file "$ROOT/memos/memo1.txt"
+check require_file "$ROOT/memos/memo2.txt"
+check require_absent "$ROOT/memo1.txt"
+check require_absent "$ROOT/memo2.txt"
+check require_file "$ROOT/secret1.txt"
+check require_file "$ROOT/secret2.txt"
+
+if [ "$FAIL" -eq 1 ]; then
+	err "État incorrect après mv : memos dans memos/, liens renommés, secrets visibles à la racine de ~/101."
+	exit 1
+fi
+
+ok "d75ecdbb8076ef9eee610e0bc71e1cd2"

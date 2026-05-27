@@ -35,6 +35,7 @@ adduser -D -s /bin/bash -h /home/user42 user42
 addgroup user42 video
 addgroup user42 input
 addgroup user42 tty
+mkdir -p /home/user42/memos
 chown -R user42:user42 /home/user42/
 
 step 'Micro editor bindings (browser-safe shortcuts)'

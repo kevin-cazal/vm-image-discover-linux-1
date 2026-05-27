@@ -1,0 +1,36 @@
+#!/bin/sh
+# Validate post-cp layout under ~/101.
+set -eu
+. "$(dirname "$0")/_common.sh"
+
+ROOT="${HOME:-/home/user42}/101"
+FAIL=0
+
+check() {
+	if ! "$@"; then
+		FAIL=1
+	fi
+}
+
+check require_dir "$ROOT"
+check require_dir "$ROOT/code"
+check require_file "$ROOT/code/infinite_loop_timer.py"
+check require_file "$ROOT/code/read_dev_zero_until_eof.c"
+check require_dir "$ROOT/links"
+check require_file "$ROOT/links/qrcode1"
+check require_file "$ROOT/links/qrcode2"
+check require_file "$ROOT/memo1.txt"
+check require_file "$ROOT/memo2.txt"
+check require_dir "$ROOT/memos"
+check require_dir "$ROOT/works"
+check require_file "$ROOT/works/essay1.txt"
+check require_file "$ROOT/works/essay2.txt"
+check require_file "$ROOT/.secret1.txt"
+check require_file "$ROOT/.secret2.txt"
+
+if [ "$FAIL" -eq 1 ]; then
+	err "Copie incomplète : vérifiez memo1.txt, memo2.txt, memos/, .secret*, links/, works/, code/ dans ~/101."
+	exit 1
+fi
+
+ok "2565827afcf8a63b73225e43883a54b2"

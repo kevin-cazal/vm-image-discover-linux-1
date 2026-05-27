@@ -7,3 +7,10 @@ docs
 coreutils-doc
 agetty
 linux-firmware-none
+coreutils
+coreutils-doc
+coreutils-env
+coreutils-fmt
+coreutils-sha512sum
+tree
+xxd

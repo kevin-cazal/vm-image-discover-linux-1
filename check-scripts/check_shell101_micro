@@ -1,0 +1,30 @@
+#!/bin/sh
+# Validate edited ~/101/memos/memo2.txt after micro exercise.
+set -eu
+. "$(dirname "$0")/_common.sh"
+
+FILE="${HOME:-/home/user42}/101/memos/memo2.txt"
+FAN="Écrire une fanfiction de 3 phrases entre une brique et un grille-pain"
+LAST="Convaincre un chat que je suis le chef"
+
+if [ ! -f "$FILE" ]; then
+	err "Fichier introuvable : $FILE (avez-vous fait l'exercice cp et mv ?)"
+	exit 1
+fi
+
+if [ "$(tail -n1 "$FILE" | grep -cF "$LAST")" -ne 1 ]; then
+	err "Ligne manquante en fin de fichier : « $LAST »"
+	exit 1
+fi
+
+COUNT=$(grep -cF "$FAN" "$FILE" || true)
+if [ "$COUNT" -gt 1 ]; then
+	err "Ligne en double encore présente : fanfiction brique / grille-pain"
+	exit 1
+fi
+if [ "$COUNT" -lt 1 ]; then
+	err "Ligne fanfiction attendue introuvable dans $FILE"
+	exit 1
+fi
+
+ok "b51eeea2920ad9f39864d129cfcacc42"

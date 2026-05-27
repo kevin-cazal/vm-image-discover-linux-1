@@ -2,6 +2,7 @@
 
 export LANG=C.UTF-8
 export LC_CTYPE=C.UTF-8
+export PATH="$HOME/bin:$PATH"
 
 case "$(tty)" in
 /dev/hvc0)

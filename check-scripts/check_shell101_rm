@@ -1,0 +1,31 @@
+#!/bin/sh
+# Validate post-rm layout under ~/101.
+set -eu
+. "$(dirname "$0")/_common.sh"
+
+ROOT="${HOME:-/home/user42}/101"
+ESSAY2="$ROOT/works/essay2.txt"
+EXP_MD5="70d8bf6b18efd7949d10f5d61485264b"
+
+if [ -d "$ROOT/code" ]; then
+	err "Le dossier code/ est encore présent sous ~/101 (utilisez rm -r)."
+	exit 1
+fi
+
+if [ -f "$ROOT/works/essay1.txt" ]; then
+	err "Le fichier works/essay1.txt est encore présent."
+	exit 1
+fi
+
+if [ ! -f "$ESSAY2" ]; then
+	err "Fichier manquant : $ESSAY2"
+	exit 1
+fi
+
+GOT=$(md5sum "$ESSAY2" | awk '{print $1}')
+if [ "$GOT" != "$EXP_MD5" ]; then
+	err "Contenu inattendu dans works/essay2.txt (essay1 supprimé mais autre modification ?)."
+	exit 1
+fi
+
+ok "d5a8519c77610b404dc97de591f56205"
