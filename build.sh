@@ -40,6 +40,16 @@ fi
 
 "$SCRIPT_DIR/vm-bridge-send/build.sh"
 "$SCRIPT_DIR/mount-host-share/build.sh"
+"$SCRIPT_DIR/check-bin/build.sh"
+# When image build runs as root, ensure checkers land in rootfs even if a prior
+# unprivileged check-bin build only wrote to check-bin/out/.
+if [ "$(id -u)" -eq 0 ] && [ -d "$SCRIPT_DIR/check-bin/out" ]; then
+	install -d "$SCRIPT_DIR/rootfs/usr/local/bin"
+	for f in "$SCRIPT_DIR/check-bin/out"/check_shell101_*; do
+		[ -f "$f" ] || continue
+		install -m 755 "$f" "$SCRIPT_DIR/rootfs/usr/local/bin/$(basename "$f")"
+	done
+fi
 
 rm -f "$IMAGE"
 

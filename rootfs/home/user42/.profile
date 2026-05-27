@@ -1,9 +1,5 @@
 # Discover Linux — Shell 101 atelier (login on hvc0)
 
-export LANG=C.UTF-8
-export LC_CTYPE=C.UTF-8
-export PATH="$HOME/bin:$PATH"
-
 case "$(tty)" in
 /dev/hvc0)
 	if [ -w /dev/hvc1 ] && [ ! -f /tmp/.splash_ready_sent ]; then
