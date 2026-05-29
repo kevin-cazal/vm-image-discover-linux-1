@@ -23,11 +23,27 @@ build_native() {
 	return 0
 }
 
-build_docker() {
-	if [ -z "${DOCKER_HOST:-}" ] && [ -S "${XDG_RUNTIME_DIR:-/run/user/$(id -u)}/docker.sock" ]; then
-		export DOCKER_HOST="unix://${XDG_RUNTIME_DIR:-/run/user/$(id -u)}/docker.sock"
+docker_sock() {
+	if [ -n "${DOCKER_HOST:-}" ]; then
+		return 0
 	fi
+	if [ -S /var/run/docker.sock ] && [ -r /var/run/docker.sock ]; then
+		export DOCKER_HOST=unix:///var/run/docker.sock
+		return 0
+	fi
+	if [ -S "${XDG_RUNTIME_DIR:-/run/user/$(id -u)}/docker.sock" ]; then
+		export DOCKER_HOST="unix://${XDG_RUNTIME_DIR:-/run/user/$(id -u)}/docker.sock"
+		return 0
+	fi
+	return 1
+}
+
+build_docker() {
+	docker_sock || true
 	if ! command -v docker >/dev/null 2>&1; then
+		return 1
+	fi
+	if [ -z "${DOCKER_HOST:-}" ]; then
 		return 1
 	fi
 	IMAGE=check-bin-i386-alpine
@@ -48,7 +64,7 @@ if build_docker; then
 elif build_native; then
 	echo "Built check_shell101_* with gcc -m32 (Docker unavailable)" >&2
 else
-	echo "Need Docker (./build.sh) or gcc -m32 for native fallback" >&2
+	echo "Need Docker (doas ./build.sh) or gcc -m32 for native fallback" >&2
 	exit 1
 fi
 
@@ -61,7 +77,7 @@ if install -d "$DEST" 2>/dev/null && [ -w "$DEST" ]; then
 	for name in $NAMES; do
 		install -m 755 "$STAGING/$name" "$DEST/$name"
 	done
-	echo "Installed check_shell101_* in $DEST"
+	echo "Installed check_shell* in $DEST"
 else
-	echo "Installed check_shell101_* in $OUT_DIR (rootfs not writable; re-run as root for $DEST)" >&2
+	echo "Installed check_shell* in $OUT_DIR (rootfs not writable; re-run: doas ./build.sh)" >&2
 fi
