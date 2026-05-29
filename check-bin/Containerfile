@@ -5,11 +5,23 @@ RUN apk add --no-cache build-base
 WORKDIR /src
 COPY common.c common.h md5.c md5.h \
 	check_shell101_cp.c check_shell101_mv.c check_shell101_micro.c \
-	check_shell101_rm.c check_shell101_livrable1.c .
+	check_shell101_rm.c check_shell101_livrable1.c \
+	check_shell102_grep_aa7566.c check_shell102_sort_grades.c \
+	check_shell102_sort_on_time.c \
+	check_shell102_head_tail_last5.c check_shell102_head_tail_first10.c \
+	check_shell102_head_tail_sample.c \
+	check_shell102_cut_grades.c check_shell102_cut_cars.c \
+	check_shell102_sed.c .
 
 RUN mkdir -p /out && \
 	for t in check_shell101_cp check_shell101_mv check_shell101_micro \
-	         check_shell101_rm check_shell101_livrable1; do \
+	         check_shell101_rm check_shell101_livrable1 \
+	         check_shell102_grep_aa7566 check_shell102_sort_grades \
+	         check_shell102_sort_on_time \
+	         check_shell102_head_tail_last5 check_shell102_head_tail_first10 \
+	         check_shell102_head_tail_sample \
+	         check_shell102_cut_grades check_shell102_cut_cars \
+	         check_shell102_sed; do \
 		gcc -O2 -Wall -Wextra -s -static -o "/out/$t" \
 			common.c md5.c "$t.c"; \
 	done

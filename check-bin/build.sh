@@ -6,7 +6,7 @@ cd "$(dirname "$0")"
 SCRIPT_DIR=$(cd "$(dirname "$0")" && pwd)
 DEST="$SCRIPT_DIR/../rootfs/usr/local/bin"
 OUT_DIR="$SCRIPT_DIR/out"
-NAMES="check_shell101_cp check_shell101_mv check_shell101_micro check_shell101_rm check_shell101_livrable1"
+NAMES="check_shell101_cp check_shell101_mv check_shell101_micro check_shell101_rm check_shell101_livrable1 check_shell102_grep_aa7566 check_shell102_sort_grades check_shell102_sort_on_time check_shell102_head_tail_last5 check_shell102_head_tail_first10 check_shell102_head_tail_sample check_shell102_cut_grades check_shell102_cut_cars check_shell102_sed"
 STAGING=$(mktemp -d)
 trap 'rm -rf "$STAGING"' EXIT
 

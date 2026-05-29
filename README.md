@@ -36,4 +36,4 @@ See [`packages`](packages). Course tools include `micro`, `mandoc`, `coreutils-d
 
 ## Shell 101 check binaries
 
-Built with Docker (or `gcc -m32` fallback) via [`check-bin/build.sh`](check-bin/build.sh); installed to `/usr/local/bin/check_shell101_*`. `build.sh` runs this before packing the image. No C sources are shipped on the guest.
+Built with Docker (or `gcc -m32` fallback) via [`check-bin/build.sh`](check-bin/build.sh); installed to `/usr/local/bin/check_shell*`. `build.sh` runs this before packing the image. No C sources are shipped on the guest.

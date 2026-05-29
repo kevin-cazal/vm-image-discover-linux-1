@@ -15,7 +15,7 @@ From the repo host (Docker required), same pattern as `vm-bridge-send/`:
 ## Flags
 
 - **cp / mv:** flag digest computed at runtime (`tree` output → MD5); nothing stored in the binary.
-- **micro / rm / livrable1:** expected 32-char hex digest stored XOR-obfuscated (`discover101` key). On success the flag is assembled on the stack (`shell1{` + hex + `}`) — no contiguous `shell1{…}` string in `.rodata`.
+- **grep_aa7566 / sort_grades / sort_on_time:** expected 32-char hex digest stored XOR-obfuscated (`discover101` key). On success the flag is assembled on the stack (`shell1{` + hex + `}`) — no contiguous `shell1{…}` string in `.rodata`.
 
 If a CTFd flag changes, update the `flag_enc` / `expect_enc` array in the matching `.c` (run `_xor_gen.py` locally to print new bytes) and rebuild.
 
