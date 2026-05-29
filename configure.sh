@@ -85,16 +85,19 @@ chmod 4755 /usr/local/sbin/mount-host-share
 
 if [ -f /etc/fstab ]; then
 	sed -i 's/\trelatime\t/\tnoatime\t/' /etc/fstab
+	if ! grep -q '[[:space:]]/mnt/host[[:space:]]' /etc/fstab; then
+		printf '%s\n' 'host9p	/mnt/host	9p	trans=virtio,version=9p2000.L,noauto,nofail	0 0' >> /etc/fstab
+	fi
 fi
 
-step 'French manual pages'
-SCRIPT_DIR=$(CDPATH= cd -- "$(dirname "$0")" && pwd)
-if [ ! -f "$SCRIPT_DIR/install-manpages-fr.sh" ]; then
-	echo "install-manpages-fr.sh missing next to configure.sh" >&2
-	exit 1
+if [ -f /etc/profile ] && ! grep -q '^export MANPATH=/usr/share/man/fr:/usr/share/man$' /etc/profile; then
+	printf '%s\n' 'export MANPATH=/usr/share/man/fr:/usr/share/man' >> /etc/profile
 fi
-if ! sh "$SCRIPT_DIR/install-manpages-fr.sh"; then
-	echo "WARNING: French manpages install failed (continuing): network may be unavailable during build." >&2
+
+step 'French manual pages (rootfs)'
+if [ ! -d /usr/share/man/fr ] || [ -z "$(find /usr/share/man/fr -name '*.gz' 2>/dev/null | head -n 1)" ]; then
+	echo "French man pages missing from image skeleton: run ./refresh-manpages-fr.sh in vm-image" >&2
+	exit 1
 fi
 
 step 'Man page index'
