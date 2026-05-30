@@ -87,26 +87,29 @@ void decode_xor(char *out, size_t out_len,
 
 void emit_flag_hex(const char *hex32)
 {
-	char out[48];
+	emit_flag_body(hex32);
+}
+
+void emit_flag_body(const char *body)
+{
+	char out[80];
 	const char pfx[] = { 's', 'h', 'e', 'l', 'l', '1', '{', '\0' };
 	const char sfx[] = { '}', '\0' };
 
 	strcpy(out, pfx);
-	strncat(out, hex32, 32);
+	strncat(out, body, sizeof(out) - strlen(out) - 2);
 	strcat(out, sfx);
 	fputs(out, stdout);
 	fputc('\n', stdout);
 }
 
-int md5_hex_file(const char *path, char hex[33])
+static int md5_hex_from_popen(const char *cmd, char hex[33])
 {
 	FILE *fp;
-	char cmd[512];
 	char out[256];
 	size_t i;
 	size_t j = 0;
 
-	snprintf(cmd, sizeof(cmd), "md5sum '%s' 2>/dev/null", path);
 	fp = popen(cmd, "r");
 	if (!fp)
 		return -1;
@@ -130,6 +133,23 @@ int md5_hex_file(const char *path, char hex[33])
 
 	hex[32] = '\0';
 	return 0;
+}
+
+int md5_hex_file(const char *path, char hex[33])
+{
+	char cmd[512];
+
+	snprintf(cmd, sizeof(cmd), "md5sum '%s' 2>/dev/null", path);
+	return md5_hex_from_popen(cmd, hex);
+}
+
+int md5_hex_file_sorted(const char *path, char hex[33])
+{
+	char cmd[512];
+
+	snprintf(cmd, sizeof(cmd),
+	    "LC_ALL=C sort '%s' 2>/dev/null | md5sum 2>/dev/null", path);
+	return md5_hex_from_popen(cmd, hex);
 }
 
 int md5_hex_tree(const char *root, char hex[33])

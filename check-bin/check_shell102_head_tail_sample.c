@@ -21,7 +21,7 @@ int main(void)
 	if (!check_path_is_file(path)) {
 		check_fail_msg(
 		    "Fichier manquant : ~/data_102/grades_sample.txt "
-		    "(12 lignes à partir de la 5e ligne de données — ex. tail -n +6 | head -12 ?)");
+		    "(consultez l'énoncé — data_102/)");
 	}
 
 	if (md5_hex_file(path, got) != 0) {

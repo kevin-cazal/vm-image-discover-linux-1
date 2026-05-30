@@ -21,7 +21,7 @@ int main(void)
 	if (!check_path_is_file(path)) {
 		check_fail_msg(
 		    "Fichier manquant : ~/data_102/on_time_flights_sorted.csv "
-		    "(grep on-time, sort -t, -k9 -n, redirection depuis data_102 ?)");
+		    "(consultez l'énoncé — data_102/)");
 	}
 
 	if (md5_hex_file(path, got) != 0) {

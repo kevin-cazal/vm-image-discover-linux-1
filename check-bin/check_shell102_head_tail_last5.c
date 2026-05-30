@@ -1,4 +1,4 @@
-/* Validate grades_last5.txt under ~/data_102. */
+/* Validate grades_last5.csv under ~/data_102. */
 #include "common.h"
 
 #include <stdio.h>
@@ -16,22 +16,22 @@ int main(void)
 	char expect[40];
 	const char *home = check_home();
 
-	snprintf(path, sizeof(path), "%s/data_102/grades_last5.txt", home);
+	snprintf(path, sizeof(path), "%s/data_102/grades_last5.csv", home);
 
 	if (!check_path_is_file(path)) {
 		check_fail_msg(
-		    "Fichier manquant : ~/data_102/grades_last5.txt "
-		    "(tail -5 grades.csv > grades_last5.txt depuis data_102 ?)");
+		    "Fichier manquant : ~/data_102/grades_last5.csv "
+		    "(consultez l'énoncé — data_102/)");
 	}
 
 	if (md5_hex_file(path, got) != 0) {
-		check_fail_msg("Impossible de lire grades_last5.txt.");
+		check_fail_msg("Impossible de lire grades_last5.csv.");
 	}
 
 	decode_flag_secret(expect, sizeof(expect), expect_enc, sizeof(expect_enc));
 	if (strcmp(got, expect) != 0) {
 		check_fail_msg(
-		    "Contenu inattendu dans grades_last5.txt "
+		    "Contenu inattendu dans grades_last5.csv "
 		    "(5 dernières lignes de grades.csv ?)");
 	}
 

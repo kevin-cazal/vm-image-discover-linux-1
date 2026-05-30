@@ -1,5 +1,5 @@
 #!/bin/sh
-# Validate edited ~/101/memos/memo2.txt after micro exercise.
+# Validate edited ~/101/memos/memo2.txt after nano exercise.
 set -eu
 . "$(dirname "$0")/_common.sh"
 

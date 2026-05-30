@@ -39,17 +39,30 @@ mkdir -p /home/user42/memos
 chown -R user42:user42 /home/user42/
 chown -R root:root /root/
 
-step 'Micro editor bindings (browser-safe shortcuts)'
-if [ -x /usr/bin/micro ]; then
-	mv /usr/bin/micro /usr/bin/_micro
-	mkdir -p /etc/micro
-	chmod +r /etc/micro
-	printf '%s' '{"CtrlSpace": "NextSplit", "Altq": "Quit"}' > /etc/micro/bindings.json
-	cat > /usr/bin/micro <<'MICROWRAP'
-#!/bin/sh
-exec /usr/bin/_micro -config-dir /etc/micro "$@"
-MICROWRAP
-	chmod +x /usr/bin/micro
+step 'Nano editor bindings (browser-safe shortcuts)'
+if command -v nano >/dev/null 2>&1; then
+	cat > /etc/nanorc <<'NANORC'
+# Unbind shortcuts that browsers intercept even when the terminal is focused.
+unbind ^W all
+bind M-W whereis all
+
+unbind ^T main
+bind M-T spell main
+
+unbind ^N main
+bind M-N newbuffer main
+
+unbind ^R main
+bind M-R insert main
+
+unbind ^F all
+bind M-F whereis all
+
+unbind ^S main
+
+# Keep ^O (save) and ^X (exit) — standard nano, browser-safe enough.
+NANORC
+	chmod 644 /etc/nanorc
 fi
 
 step 'Setup autologin'

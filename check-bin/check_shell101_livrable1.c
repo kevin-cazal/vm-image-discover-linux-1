@@ -123,7 +123,7 @@ int main(void)
 		free(listing);
 		check_fail_msg(
 		    "Contenu de l'archive incorrect (tar -tf). "
-		    "Vérifiez le dossier 101 archivé après rm/micro/mv.");
+		    "Vérifiez le dossier 101 archivé après rm/nano/mv.");
 	}
 	free(listing);
 

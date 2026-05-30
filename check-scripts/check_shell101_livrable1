@@ -26,7 +26,7 @@ EXP_MEMBERS=$(printf '%s\n' \
 	'101/works/essay2.txt')
 
 if [ "$GOT_MEMBERS" != "$EXP_MEMBERS" ]; then
-	err "Contenu de l'archive incorrect (tar -tf). Vérifiez le dossier 101 archivé après rm/micro/mv."
+	err "Contenu de l'archive incorrect (tar -tf). Vérifiez le dossier 101 archivé après rm/nano/mv."
 	exit 1
 fi
 

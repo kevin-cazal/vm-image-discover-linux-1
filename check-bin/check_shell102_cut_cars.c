@@ -22,7 +22,7 @@ int main(void)
 	if (!check_path_is_file(path)) {
 		check_fail_msg(
 		    "Fichier manquant : ~/data_102/cars_without_personal_info.csv "
-		    "(cut -d, -f1-4 cars.csv > cars_without_personal_info.csv ?)");
+		    "(consultez l'énoncé — data_102/)");
 	}
 
 	if (md5_hex_file(path, got) != 0) {

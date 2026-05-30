@@ -1,4 +1,4 @@
-/* Validate edited ~/101/memos/memo2.txt after micro exercise. */
+/* Validate edited ~/101/memos/memo2.txt after nano exercise. */
 #include "common.h"
 
 #include <stdio.h>
@@ -78,9 +78,8 @@ int main(void)
 	}
 
 	if (!last_line_matches(path, last)) {
-		fprintf(stderr,
-		    "Ligne manquante en fin de fichier : « %s »\n", last);
-		exit(1);
+		check_fail_msg(
+		    "La dernière ligne du fichier ne correspond pas à l'énoncé.");
 	}
 
 	fan_count = file_contains_line(path, fan);

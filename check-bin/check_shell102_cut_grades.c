@@ -5,8 +5,8 @@
 #include <string.h>
 
 static const unsigned char expect_enc[] = {
-	92, 92, 16, 81, 86, 67, 6, 71, 85, 85, 84, 7, 81, 74, 82, 87,
-	64, 4, 64, 83, 3, 6, 81, 8, 75, 7, 94, 64, 87, 20, 4, 4
+	7, 95, 67, 1, 87, 64, 3, 23, 6, 3, 7, 84, 11, 75, 90, 92,
+	16, 80, 16, 1, 85, 87, 93, 91, 70, 84, 91, 23, 84, 70, 82, 86
 };
 
 int main(void)
@@ -21,7 +21,7 @@ int main(void)
 	if (!check_path_is_file(path)) {
 		check_fail_msg(
 		    "Fichier manquant : ~/data_102/grades_only.txt "
-		    "(cut -d, -f3 grades.csv > grades_only.txt depuis data_102 ?)");
+		    "(consultez l'énoncé — data_102/)");
 	}
 
 	if (md5_hex_file(path, got) != 0) {
@@ -32,7 +32,7 @@ int main(void)
 	if (strcmp(got, expect) != 0) {
 		check_fail_msg(
 		    "Contenu inattendu dans grades_only.txt "
-		    "(3e colonne — les notes — de grades.csv ?)");
+		    "(3e colonne — les notes — de grades.csv, sans en-tête ?)");
 	}
 
 	emit_flag_hex(got);

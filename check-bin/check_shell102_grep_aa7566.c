@@ -21,7 +21,7 @@ int main(void)
 	if (!check_path_is_file(path)) {
 		check_fail_msg(
 		    "Fichier manquant : ~/data_102/flight_AA7566_info.txt "
-		    "(grep AA7566 flights.csv > flight_AA7566_info.txt depuis data_102 ?)");
+		    "(consultez l'énoncé — data_102/)");
 	}
 
 	if (md5_hex_file(path, got) != 0) {

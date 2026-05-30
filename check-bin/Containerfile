@@ -4,7 +4,7 @@ RUN apk add --no-cache build-base
 
 WORKDIR /src
 COPY common.c common.h md5.c md5.h \
-	check_shell101_cp.c check_shell101_mv.c check_shell101_micro.c \
+	check_shell101_cp.c check_shell101_mv.c check_shell101_nano.c \
 	check_shell101_rm.c check_shell101_livrable1.c \
 	check_shell102_grep_aa7566.c check_shell102_sort_grades.c \
 	check_shell102_sort_on_time.c \
@@ -14,7 +14,7 @@ COPY common.c common.h md5.c md5.h \
 	check_shell102_sed.c check_shell102_find_concat.c check_shell102_grep_avance.c .
 
 RUN mkdir -p /out && \
-	for t in check_shell101_cp check_shell101_mv check_shell101_micro \
+	for t in check_shell101_cp check_shell101_mv check_shell101_nano \
 	         check_shell101_rm check_shell101_livrable1 \
 	         check_shell102_grep_aa7566 check_shell102_sort_grades \
 	         check_shell102_sort_on_time \

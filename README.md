@@ -32,7 +32,7 @@ IMAGE_SIZE=512M IMAGE=./alpine-bios-512M.img doas ./build.sh
 
 ## Packages
 
-See [`packages`](packages). Course tools include `micro`, `mandoc`, `coreutils-doc`, and French translations (`manpages-fr` pre-expanded under `rootfs/usr/share/man/fr` from `vendor/*.deb`). After updating the vendored `.deb`, run [`./refresh-manpages-fr.sh`](refresh-manpages-fr.sh) on the host (use `doas` if `rootfs/` is not writable). The guest defaults to `LANG=fr_FR.UTF-8` so `man` shows French pages when available (English fallback otherwise).
+See [`packages`](packages). Course tools include `nano`, `mandoc`, `coreutils-doc`, and French translations (`manpages-fr` pre-expanded under `rootfs/usr/share/man/fr` from `vendor/*.deb`). After updating the vendored `.deb`, run [`./refresh-manpages-fr.sh`](refresh-manpages-fr.sh) on the host (use `doas` if `rootfs/` is not writable). The guest defaults to `LANG=fr_FR.UTF-8` so `man` shows French pages when available (English fallback otherwise).
 
 ## Shell 101 check binaries
 

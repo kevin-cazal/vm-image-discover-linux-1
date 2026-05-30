@@ -5,9 +5,10 @@
 #include <string.h>
 
 static const unsigned char expect_enc[] = {
-	93, 15, 68, 1, 11, 70, 1, 20, 3, 1, 84, 85, 11, 71, 84, 86,
-	66, 80, 64, 2, 2, 5, 81, 81, 22, 87, 95, 16, 4, 67, 0, 86
+	2, 90, 71, 85, 12, 69, 4, 65, 8, 9, 5, 92, 11, 17, 85, 13,
+	66, 3, 74, 0, 1, 80, 92, 92, 64, 86, 91, 78, 0, 64, 3, 9
 };
+/* expect: md5 of `LC_ALL=C sort all_data.csv` (order-independent) */
 
 int main(void)
 {
@@ -21,7 +22,7 @@ int main(void)
 		    "(concaténez les .csv de data_102_delivery puis copiez sur /mnt/host ?)");
 	}
 
-	if (md5_hex_file(path, got) != 0) {
+	if (md5_hex_file_sorted(path, got) != 0) {
 		check_fail_msg("Impossible de lire /mnt/host/all_data.csv.");
 	}
 
@@ -29,7 +30,7 @@ int main(void)
 	if (strcmp(got, expect) != 0) {
 		check_fail_msg(
 		    "Contenu inattendu dans /mnt/host/all_data.csv "
-		    "(find . -name '*.csv' -exec cat {} + depuis data_102_delivery ?)");
+		    "(concaténez tous les .csv de data_102_delivery, sans all_data.csv ?)");
 	}
 
 	emit_flag_hex(got);

@@ -2,7 +2,7 @@ tzdata
 bash
 busybox-extras
 less
-micro
+nano
 docs
 mandoc
 mandoc-apropos
