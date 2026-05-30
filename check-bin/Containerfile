@@ -11,7 +11,7 @@ COPY common.c common.h md5.c md5.h \
 	check_shell102_head_tail_last5.c check_shell102_head_tail_first10.c \
 	check_shell102_head_tail_sample.c \
 	check_shell102_cut_grades.c check_shell102_cut_cars.c \
-	check_shell102_sed.c .
+	check_shell102_sed.c check_shell102_find_concat.c check_shell102_grep_avance.c .
 
 RUN mkdir -p /out && \
 	for t in check_shell101_cp check_shell101_mv check_shell101_micro \
@@ -21,7 +21,7 @@ RUN mkdir -p /out && \
 	         check_shell102_head_tail_last5 check_shell102_head_tail_first10 \
 	         check_shell102_head_tail_sample \
 	         check_shell102_cut_grades check_shell102_cut_cars \
-	         check_shell102_sed; do \
+	         check_shell102_sed check_shell102_find_concat check_shell102_grep_avance; do \
 		gcc -O2 -Wall -Wextra -s -static -o "/out/$t" \
 			common.c md5.c "$t.c"; \
 	done

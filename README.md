@@ -15,12 +15,12 @@ git submodule update --init --recursive
 doas ./build.sh
 ```
 
-Produces `alpine-bios-512M.img` by default (`IMAGE_SIZE=512M`).
+Produces `alpine-bios-256M.img` by default (`IMAGE_SIZE=256M`).
 
-Override:
+Override (larger disk):
 
 ```sh
-IMAGE_SIZE=256M IMAGE=./alpine-bios-256M.img doas ./build.sh
+IMAGE_SIZE=512M IMAGE=./alpine-bios-512M.img doas ./build.sh
 ```
 
 ## Guest layout

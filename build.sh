@@ -2,7 +2,7 @@
 set -eu
 
 SCRIPT_DIR=$(cd "$(dirname "$0")" && pwd)
-IMAGE_SIZE="${IMAGE_SIZE:-512M}"
+IMAGE_SIZE="${IMAGE_SIZE:-256M}"
 IMAGE="${IMAGE:-$SCRIPT_DIR/alpine-bios-${IMAGE_SIZE}.img}"
 AMVI="${ALPINE_MAKE_VM_IMAGE:-$SCRIPT_DIR/submodules/alpine-make-vm-image/alpine-make-vm-image}"
 

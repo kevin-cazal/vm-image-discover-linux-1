@@ -14,6 +14,7 @@ for name, plain in [
     ("cut_grades", "85c295c5deec89186a2b375a8d162f54"),
     ("cut_cars", "2cfba3c4bf29b8720993e860f0662670"),
     ("sed", "ac2cc53f7c5e91b83bb6c01ce82bfc62"),
+    ("find_concat", "9f7bd0df21e1b47945232458e40fa11f"),
 ]:
     enc = [ord(plain[i]) ^ key[i % len(key)] for i in range(len(plain))]
     print(f"/* {name} */")
