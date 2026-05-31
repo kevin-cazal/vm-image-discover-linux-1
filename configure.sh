@@ -47,10 +47,9 @@ unbind ^W all
 bind M-W whereis all
 
 unbind ^T main
-bind M-T spell main
+bind M-T speller main
 
 unbind ^N main
-bind M-N newbuffer main
 
 unbind ^R main
 bind M-R insert main
