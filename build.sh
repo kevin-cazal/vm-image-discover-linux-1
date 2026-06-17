@@ -39,7 +39,6 @@ if [ -z "${APK:-}" ] && [ -x /tmp/apk-extract/sbin/apk.static ]; then
 fi
 
 "$SCRIPT_DIR/vm-bridge-send/build.sh"
-"$SCRIPT_DIR/mount-host-share/build.sh"
 "$SCRIPT_DIR/check-bin/build.sh"
 # When image build runs as root, ensure checkers land in rootfs even if a prior
 # unprivileged check-bin build only wrote to check-bin/out/.
@@ -52,6 +51,9 @@ if [ "$(id -u)" -eq 0 ] && [ -d "$SCRIPT_DIR/check-bin/out" ]; then
 fi
 
 rm -f "$IMAGE"
+
+mkdir -p "$SCRIPT_DIR/rootfs/mnt/host"
+chmod 777 "$SCRIPT_DIR/rootfs/mnt/host"
 
 "$AMVI" \
 	--arch x86 \

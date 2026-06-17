@@ -103,7 +103,7 @@ int main(void)
 
 	if (!check_path_is_file(archive)) {
 		fprintf(stderr,
-		    "Archive introuvable : %s (montez /mnt/host et copiez .delivery_101.tar)\n",
+		    "Archive introuvable : %s (copiez .delivery_101.tar dans /mnt/host)\n",
 		    archive);
 		exit(1);
 	}

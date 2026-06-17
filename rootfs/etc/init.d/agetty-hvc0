@@ -8,6 +8,5 @@ pidfile="/run/${RC_SVCNAME}.pid"
 respawn_period=60
 
 depend() {
-	need mount-host9p
-	after mount-host9p agetty-ttyS0
+	after agetty-ttyS0
 }

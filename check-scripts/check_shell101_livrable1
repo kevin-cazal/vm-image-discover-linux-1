@@ -7,7 +7,7 @@ ARCHIVE="/mnt/host/.delivery_101.tar"
 EXP_CONTENT_MD5="189e15d024987af4682d4b5ff4c6fa7e"
 
 if [ ! -f "$ARCHIVE" ]; then
-	err "Archive introuvable : $ARCHIVE (montez /mnt/host et copiez .delivery_101.tar)"
+	err "Archive introuvable : $ARCHIVE (copiez .delivery_101.tar dans /mnt/host)"
 	exit 1
 fi
 

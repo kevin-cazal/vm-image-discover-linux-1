@@ -75,31 +75,21 @@ sed -Ei \
 	/etc/update-extlinux.conf
 update-extlinux
 
-step 'Host 9p share and vm-bridge'
-if [ ! -x /usr/local/sbin/mount-host-share ]; then
-	echo "mount-host-share missing: run mount-host-share/build.sh before building the image" >&2
-	exit 1
-fi
+step 'vm-bridge'
 if [ ! -x /usr/local/bin/vm-bridge-send ]; then
 	echo "vm-bridge-send missing: run vm-bridge-send/build.sh before building the image" >&2
 	exit 1
 fi
 
-mkdir -p /mnt/host /etc/modules-load.d
-printf '%s\n' 9p 9pnet_virtio > /etc/modules-load.d/host9p.conf
-chmod +x /etc/init.d/mount-host9p
-rc-update add mount-host9p boot
+mkdir -p /mnt/host
+chmod 777 /mnt/host
 chmod 4755 /usr/local/bin/vm-bridge-send
 chmod 4755 /usr/local/bin/vm-bridge-raw
 chmod 4755 /usr/local/bin/vm-bridge-read
 chmod 4755 /usr/local/bin/vm-bridge-listen
-chmod 4755 /usr/local/sbin/mount-host-share
 
 if [ -f /etc/fstab ]; then
 	sed -i 's/\trelatime\t/\tnoatime\t/' /etc/fstab
-	if ! grep -q '[[:space:]]/mnt/host[[:space:]]' /etc/fstab; then
-		printf '%s\n' 'host9p	/mnt/host	9p	trans=virtio,version=9p2000.L,noauto,nofail	0 0' >> /etc/fstab
-	fi
 fi
 
 if [ -f /etc/profile ] && ! grep -q '^export MANPATH=/usr/share/man/fr:/usr/share/man$' /etc/profile; then

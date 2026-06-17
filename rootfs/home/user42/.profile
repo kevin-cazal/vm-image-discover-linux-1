@@ -18,11 +18,7 @@ case "$(tty)" in
 
       /mnt/host
 
-  (partage avec l'ordinateur hôte — fichiers visibles côté navigateur)
-
 EOF
-
-	/usr/local/sbin/mount-host-share 2>/dev/null || true
 	cd "$HOME" || true
 	;;
 esac
